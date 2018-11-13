@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+#
+# What does this script ?
+# List all init.d services
+#
+# ls /etc/init.d/ | sed -e 's/\.conf//'
+
+# @TODO need to dispay result of above command

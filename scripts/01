@@ -3,6 +3,14 @@
 #
 # What does this script ?
 # Display only the login, the UID and the path of each file entry of /etc/passwd
+# Structure of /etc/passwd file
+# User name
+# Encrypted password
+# User ID number (UID)
+# User's group ID number (GID)
+# Full name of the user (GECOS)
+# User home directory
+# Login shell
 #
 
 set -e

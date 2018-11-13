@@ -5,4 +5,6 @@
 # Command that connect in ssh on the machine in paralelle of the grapĥical session
 #
 
+# @TODO need to set good ip adress
+
 ssh root@192.168.32.27

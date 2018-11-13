@@ -7,45 +7,25 @@
 # - Dsiplat all ip adresses from the same sub-network
 #
 
-# Get all network interfaces
-# -u limits this to interfaces that are up
-readonly INTERFACES=$(ifconfig -ul)
-
-INTERFACE_WE_WANT=""
-
-# For each interface
-for X in $INTERFACES
-do
-  XCONFIG=$(ifconfig $X)
-
-  ETHER=$(echo $XCONFIG | grep ether)
-  NAME=$(echo $XCONFIG | grep 'en[0-9]\+\:')
-  ACTIVE=$(echo $XCONFIG | grep 'status: active')
-
-  # echo "$XCONFIG"
-  if [[ -z "$ETHER" ]] || [[ -z "$ACTIVE" ]] || [[ -z "$NAME" ]]; then
-    # No valid interface
-    echo -n
-  else
-    INTERFACE_WE_WANT="$XCONFIG"
-  fi
-done
+# Get the ethernet network interface
+# On macos, it is en0
+readonly INTERFACE=$(ifconfig en0)
 
 # No valid interface
-if [ "$INTERFACE_WE_WANT" == "" ]; then
-  echo "No active ether interface"
+if [ "$INTERFACE" == "" ]; then
+  echo "No active ethernet interface"
   exit
 fi
 
-echo "$INTERFACE_WE_WANT"
+echo "$INTERFACE"
 
 # Get broadcast adress
 # [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\
 readonly BROADCAST=$(echo "$INTERFACE_WE_WANT" | sed -n -e "/broadcast/ s/.*broadcast //p")
 
+# Adresse to
 echo "BROADCAST : $BROADCAST"
 
 # Get all ip adress  from the same subnetwork
 echo "All ip adresses in $BROADCAST"
-
-netstat -r BROADCAST
+# @TODO need to list all ip from the sub network of broadcast

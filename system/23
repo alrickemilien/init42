@@ -7,4 +7,5 @@ Expliquez comment se connecter en tant que ce nouvelle utilisateur.
 - Enter password
 
 #2 - En ssh
+# @TODO need to set good ip adress
 ssh client@192.168.32.27

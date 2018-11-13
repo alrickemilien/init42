@@ -16,6 +16,8 @@ if [[ -z $1 ]]; then
 	exit
 fi
 
+# @TODO need to test on debian
+
 readonly USER_TO_DELETE=$1
 
 # Grep all the '$1' user's process
