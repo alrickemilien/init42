@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+#
+# What does this script ?
+# Identify and display the MAC adress of the Wi-Fi card
+#
+
+ifconfig en1 | grep "ether" | cut -d " " -f2

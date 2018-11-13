@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#
+# What does this script ?
+# Ask the extern DNS 8.8.8.8 on the domain name slash16.org
+#
+
+nslookup slash16.org 8.8.8.8

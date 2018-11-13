@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#
+# What does this script ?
+# Display the free space on the disk and the space used by the systeme
+# in a format a human can read easily
+#
+
+df -h

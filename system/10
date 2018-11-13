@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#
+# What does this script ?
+# List disk partitions of the current machine
+#
+
+fdisk -l

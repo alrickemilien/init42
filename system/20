@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#
+# What does this script ?
+# List all existing user on the machine
+#
+
+# /etc/passwd structure
+# User name
+# Encrypted password
+# User ID number (UID)
+# User's group ID number (GID)
+# Full name of the user (GECOS)
+# User home directory
+# Login shell
+
+cut -d ':' -f 1 /etc/passwd

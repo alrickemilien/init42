@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+#
+# What does this script ?
+# Change th display on the screen
+#
+
+# No arguments supplied
+if [ $# -eq 0 ] ;then
+    echo "No arguments supplied"
+    exit
+fi
+
+readonly MODE=$(echo $1 | tr '[A-Z]' '[a-z]')
+
+if [ -z "$DISPLAY" ]; then
+  echo "DISPLAY variable is not set"
+  exit
+fi
+
+# Detect monitors
+readonly MONITORS=$(xrandr --listmonitors)
+
+readonly MONITOR_NUMBER=$(echo "$MONITORS" | head -1 | rev | cut -d' ' -f 1 | rev)
+readonly MONITOR1=$(echo "$MONITORS" | tail -n+2 | head -1 | rev | cut -d' ' -f 1 | rev)
+readonly MONITOR2=$(echo "$MONITORS" | tail -n+3 | head -1 | rev | cut -d' ' -f 1 | rev)
+
+echo "$MONITOR1 MONITOR1"
+echo "$MONITOR2 MONITOR2"
+
+if [ $MODE == "landscape" ] ;then
+        echo "$MODE"
+        xrandr --output "$MONITOR1" --mode 1920x1080 --rotate normal
+        xrandr --output "$MONITOR2" --off
+elif [ $MODE == "portrait" ] ;then
+        echo "$MODE"
+        xrandr --output "$MONITOR1" --mode 1920x1080 --rotate left
+        xrandr --output "$MONITOR2" --off
+elif [ $MODE == "horizon" ] ;then
+        echo "$MODE"
+        xrandr --output "$MONITOR1" --mode 1920x1080 --rotate normal
+        xrandr --output "$MONITOR2" --mode 1920x1080 --rotate normal --right-of HDMI-1
+elif [ $MODE == "zenith" ] ;then
+        echo "$MODE"
+        xrandr --output "$MONITOR1" --mode 1920x1080 --rotate left
+        xrandr --output "$MONITOR2" --mode 1920x1080 --rotate left --below HDMI-1
+elif [ $MODE == "nothing" ] ;then
+        echo "Nothing to do"
+else
+        echo "Unknown display"
+fi

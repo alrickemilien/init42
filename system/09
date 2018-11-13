@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#
+# What does this script ?
+# Give the connected user on the system
+#
+
+who

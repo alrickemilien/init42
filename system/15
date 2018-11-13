@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#
+# What does this script ?
+# Kill the background process tail we run with the script 14 before
+#
+
+pkill tail

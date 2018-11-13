@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+#
+# What does this script ?
+# Identify and display the ethernet interface setup :
+# - Display the broadcast adress
+# - Dsiplat all ip adresses from the same sub-network
+#
+
+ipconfig getifaddr en0

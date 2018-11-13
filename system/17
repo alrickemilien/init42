@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#
+# What does this script ?
+# Command that connect in ssh on the machine in paralelle of the grapĥical session
+#
+
+ssh root@192.168.32.27

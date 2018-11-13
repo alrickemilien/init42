@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+#
+# What does this script ?
+# Supress a logged user on the machine
+#
+
+set -e
+
+readonly USAGE="Usage: $0 [USER]\n\
+	USER,		the user to suppress.\n"
+
+# When the argument is not defined
+if [[ -z $1 ]]; then
+	printf "$USAGE"
+	exit
+fi
+
+readonly USER_TO_DELETE=$1
+
+# Grep all the '$1' user's process
+pgrep -u $USER_TO_DELETE
+
+ps -fp $(pgrep -u $USER_TO_DELETE)
+
+# Grep all process ids
+killall -KILL -u $USER_TO_DELETE
+
+# Delete the user
+userdel -r $USER_TO_DELETE

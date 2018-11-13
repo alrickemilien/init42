@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#
+# What does this script ?
+# Find the ip adress of the machine given by the dhcp
+#

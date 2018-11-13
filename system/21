@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#
+# What does this script ?
+# List all real users on the machine
+#
+
+cat /etc/passwd | grep /bin/bash | cut -d ':' -f 1

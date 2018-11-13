@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+#
+# What does this script ?
+# Display only the login, the UID and the path of each file entry of /etc/passwd
+#
+
+set -e
+
+readonly CONTENT=$(cat /etc/passwd)
+
+for X in $CONTENT
+do
+    LOGIN_VAR=$(echo "$X" | cut -d ':' -f1)
+    UID_VAR=$(echo "$X" | cut -d ':' -f4)
+    PATH_VAR=$(echo "$X" | rev | cut -d':' -f 1 | rev)
+
+    echo "$LOGIN_VAR:$UID_VAR:$PATH_VAR"
+done

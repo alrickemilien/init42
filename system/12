@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#
+# What does this script ?
+# Gives the exact size of each sub folder of the /var folder
+# in a format a human can read easily
+#
+
+du -sh /var/*

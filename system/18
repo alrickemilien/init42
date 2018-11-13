@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#
+# What does this script ?
+# Stop the ssh service
+#
+
+service ssh stop

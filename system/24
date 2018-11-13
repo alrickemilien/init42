@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#
+# What does this script ?
+# List all installed packages on the machine
+#
+
+dpkg-query -f '${Package}\n' -W

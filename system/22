@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#
+# What does this script ?
+# Add a new local user named client on the machine
+#
+
+useradd client

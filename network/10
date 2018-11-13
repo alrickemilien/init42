@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#
+# What does this script ?
+# Identify all network interfaces between the machine and the hostanme slash16.org
+#
+
+traceroute slash16.org
