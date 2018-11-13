@@ -1,0 +1,2 @@
+nslookup `ipconfig getifaddr en0`
+This ask the local dns about my own local ip adress

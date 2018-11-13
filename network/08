@@ -1,4 +1,1 @@
-How to find the hebergeur of the domain slash16.org ?
-
-It gives us :
-https://www.bookmyname.com
+To find it, use traceroute slash16.org, and notice the presence of amazon, so it is AWS.

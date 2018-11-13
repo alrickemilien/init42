@@ -1,4 +1,9 @@
-Public IP of 42 :
-163.172.250.11
-163.172.250.12
-//used>>dig +short 8.8.8.8 42.fr
+Name:	42.fr
+Address: 163.172.250.12
+Name:	42.fr
+Address: 163.172.250.13
+Name:	42.fr
+Address: 163.172.250.11
+
+Use this command
+nslookup 42.fr 8.8.8.8

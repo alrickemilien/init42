@@ -1,2 +1,5 @@
-The name of the interface that make the link between local and nextern is the one with 'nat'
-It's ip adress is 10.90.1.11
+The name of the interface that make the link between local and extern is the one with nat-1
+It's ip address is 10.60.1.11
+Do traceroute on an external domain
+Do traceroute on your ip adress
+and notice the difference
