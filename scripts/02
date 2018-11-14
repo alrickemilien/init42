@@ -5,8 +5,6 @@
 # Supress a logged user on the machine
 #
 
-set -e
-
 readonly USAGE="Usage: $0 [USER]\n\
 	USER,		the user to suppress.\n"
 
@@ -16,17 +14,29 @@ if [[ -z $1 ]]; then
 	exit
 fi
 
-# @TODO need to test on debian
-
 readonly USER_TO_DELETE=$1
 
-# Grep all the '$1' user's process
-pgrep -u $USER_TO_DELETE
+# Check if user exist
+getent passwd $1  > /dev/null
+if [ $? -ne 0 ] ; then
+	echo "Invalid user"
+	exit
+fi
 
-ps -fp $(pgrep -u $USER_TO_DELETE)
+if [ $(id -u $USER_TO_DELETE) == $(id -u $USER) ]; then
+	echo "Cannot delete myself"
+	exit
+fi
+
+if [ $(id -u $USER_TO_DELETE) -eq 0 ]; then
+	echo "Cannot delete root and all root process"
+	exit
+fi
 
 # Grep all process ids
 killall -KILL -u $USER_TO_DELETE
+
+echo "$KILLED_PROCESS"
 
 # Delete the user
 userdel -r $USER_TO_DELETE

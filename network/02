@@ -27,5 +27,12 @@ readonly BROADCAST=$(echo "$INTERFACE_WE_WANT" | sed -n -e "/broadcast/ s/.*broa
 echo "BROADCAST : $BROADCAST"
 
 # Get all ip adress  from the same subnetwork
-echo "All ip adresses in $BROADCAST"
-# @TODO need to list all ip from the sub network of broadcast
+echo "All ip adresses given from $BROADCAST"
+
+# ARP is the protocol used to by the broadcast
+# Each machine of the network is listening to the broadcast
+# To communicate with a machine on the same network
+# it asks the mac adress of the corresponding ip to the broadcast
+# then the broadcast will ask each machine who it is
+# and respond the mac adress you want
+arp -n
