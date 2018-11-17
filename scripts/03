@@ -14,8 +14,7 @@ set -e
 # Get date informations
 
 # Set a new line variable
-readonly RET="=============================="
-
+readonly HEAD="=============================="
 
 # Store the package list update command
 readonly UPDATE_LOG_PATH="/var/log/update_script.log"
@@ -31,7 +30,7 @@ readonly DATE=$(date +"%m-%d-%y")
 readonly HOUR=$(date +"%r")
 
 # Concat date informations
-readonly TIME="$RET The $DATE at $HOUR $RET"
+readonly TIME="$HEAD The $DATE at $HOUR $RET"
 
 # Update
 # Format the top of a new insert
@@ -46,16 +45,15 @@ apt-get upgrade -y >> $UPGRADE_LOG_PATH
 # Cron handling
 #
 
-# Open the crontab modification
-crontab -e
-
 # Execute on every week
-readonly PATH="$(cd "$(dirname "$0")" && pwd)/03"
-readonly RULE="@weekly $PATH"
+readonly PATH_TO_SCRIPT="$(cd "$(dirname "$0")" && pwd)/03"
+readonly RULE="@weekly $PATH_TO_SCRIPT"
 
 # Append to cron task only if no exist
-if [ -z $(crontab -l | grep $RULE) ]; then
-  echo $RULE | crontab -
+readonly RET="$(crontab -l 2> /dev/null | grep "$RULE")"
+
+if [[ "$RET" == "" ]]; then
+  echo "$RULE" | crontab -
 fi
 
 echo "DONE !"
