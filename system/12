@@ -6,4 +6,4 @@
 # in a format a human can read easily
 #
 
-du -sh /var/*
+du -shP /var/*
