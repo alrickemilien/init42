@@ -1,4 +1,4 @@
 To find it, use traceroute slash16.org, and notice the presence of amazon, so it is AWS.
 
 Or find the ip adress of slash16.org with nslookup slash16.org 8.8.8.8
-Then execute whois [ip]
+Then execute whois command on ip you fetch from the above command

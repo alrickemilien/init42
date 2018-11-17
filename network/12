@@ -5,4 +5,5 @@
 # Find the ip adress of the machine given by the dhcp
 #
 
+# To check open the System Preferences => Network 
 ipconfig getifaddr en0

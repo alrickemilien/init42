@@ -21,13 +21,13 @@ echo "$INTERFACE"
 
 # Get broadcast adress
 # [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\
-readonly BROADCAST=$(echo "$INTERFACE_WE_WANT" | sed -n -e "/broadcast/ s/.*broadcast //p")
+readonly BROADCAST=$(echo "$INTERFACE" | sed -n -e "/broadcast/ s/.*broadcast //p")
 
 # Adresse to
 echo "BROADCAST : $BROADCAST"
 
 # Get all ip adress  from the same subnetwork
-echo "All ip adresses given from $BROADCAST"
+echo "All ip adresses given from $BROADCAST :"
 
 # ARP is the protocol used to by the broadcast
 # Each machine of the network is listening to the broadcast
@@ -35,4 +35,4 @@ echo "All ip adresses given from $BROADCAST"
 # it asks the mac adress of the corresponding ip to the broadcast
 # then the broadcast will ask each machine who it is
 # and respond the mac adress you want
-arp -n
+arp -n -a
