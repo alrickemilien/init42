@@ -1,59 +1,61 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 #
 # What does this script ?
-# Change th display on the screen
+# Update package every zeek and log it
+#
+
+#
+# CONFIGURATION VARIABLE
 #
 
 set -e
 
-readonly CURRENT=$(xrandr | grep "current" | cut -d ',' -f 2)
-readonly X=$(echo $CURRENT | cut -d ' ' -f 2)
-readonly Y=$(echo $CURRENT | cut -d ' ' -f 4)
+# Get date informations
 
-# No arguments supplied
-if [ $# -eq 0 ] ;then
-    echo "No arguments supplied"
-    exit
+# Set a new line variable
+readonly RET="=============================="
+
+
+# Store the package list update command
+readonly UPDATE_LOG_PATH="/var/log/update_script.log"
+
+# Store the package update commandi - option y to overpass confirmation
+readonly UPGRADE_LOG_PATH="/var/log/update_script.log"
+
+#
+## Script execution
+#
+
+readonly DATE=$(date +"%m-%d-%y")
+readonly HOUR=$(date +"%r")
+
+# Concat date informations
+readonly TIME="$RET The $DATE at $HOUR $RET"
+
+# Update
+# Format the top of a new insert
+echo $TIME >> "$UPDATE_LOG_PATH"
+
+apt-get update >> "$UPDATE_LOG_PATH"
+
+# Upgrade
+apt-get upgrade -y >> $UPGRADE_LOG_PATH
+
+#
+# Cron handling
+#
+
+# Open the crontab modification
+crontab -e
+
+# Execute on every week
+readonly PATH="$(cd "$(dirname "$0")" && pwd)/03"
+readonly RULE="@weekly $PATH"
+
+# Append to cron task only if no exist
+if [ -z $(crontab -l | grep $RULE) ]; then
+  echo $RULE | crontab -
 fi
 
-readonly ASK=$(echo $1 | tr '[A-Z]' '[a-z]')
-
-if [ -z "$DISPLAY" ]; then
-  echo "DISPLAY variable is not set"
-  exit
-fi
-
-# Detect monitors
-readonly MONITORS=$(xrandr --listmonitors)
-
-readonly MONITOR_NUMBER=$(echo "$MONITORS" | head -1 | rev | cut -d' ' -f 1 | rev)
-readonly MONITOR1=$(echo "$MONITORS" | tail -n+2 | head -1 | rev | cut -d' ' -f 1 | rev)
-
-# Detect if second monitor
-if [ $MONITOR_NUMBER -gt 2 ]; then
-  readonly MONITOR2=$(echo "$MONITORS" | tail -n+3 | head -1 | rev | cut -d' ' -f 1 | rev)
-fi
-
-if [ $ASK == "landscape" ] ;then
-        xrandr --output "$MONITOR1" --mode "$X"x"$Y" --rotate normal
-        if [ $MONITOR_NUMBER -gt 2 ]; then
-          xrandr --output "$MONITOR2" --off
-        fi
-elif [ $ASK == "portrait" ] ;then
-        xrandr --output "$MONITOR1" --mode "$X"x"$Y" --rotate left
-        if [ $MONITOR_NUMBER -gt 2 ]; then
-          xrandr --output "$MONITOR2" --off
-        fi
-elif [[ $ASK == "horizon" ]] && [[ $MONITOR_NUMBER -gt 2 ]] ;then
-        xrandr --output "$MONITOR1" --mode "$X"x"$Y" --rotate normal
-       xrandr --output "$MONITOR2" --mode "$X"x"$Y" --rotate normal --right-of "$MONITOR1"
-elif [[ $ASK == "zenith" ]] && [[ $MONITOR_NUMBER -gt 2 ]] ;then
-        xrandr --output "$MONITOR1" --mode "$X"x"$Y" --rotate left
-        xrandr --output "$MONITOR2" --mode "$X"x"$Y" --rotate left --below "$MONITOR1"
-else
-        echo "Unknown display"
-        exit
-fi
-
-echo "$ASK"
+echo "DONE !"
