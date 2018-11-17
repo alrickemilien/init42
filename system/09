@@ -5,4 +5,4 @@
 # Give the connected user on the system
 #
 
-who
+who -u

@@ -6,4 +6,4 @@
 # It can be active, inactive, or dead
 #
 
-service ssh status
+/etc/init.d/ssh status

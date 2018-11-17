@@ -3,9 +3,8 @@ Expliquez comment se connecter en tant que ce nouvelle utilisateur.
 
 #1 - En session graphique
 - Log out
-- Enter login
+- Enter login maurice
 - Enter password
 
 #2 - En ssh
-# @TODO need to set good ip adress
-ssh client@192.168.32.27
+ssh maurice@127.0.0.1

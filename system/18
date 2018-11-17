@@ -5,4 +5,4 @@
 # Stop the ssh service
 #
 
-service ssh stop
+systemctl stop ssh

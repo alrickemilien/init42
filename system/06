@@ -5,4 +5,4 @@
 # Restart the ssh service
 #
 
-service ssh restart
+systemctl restart ssh

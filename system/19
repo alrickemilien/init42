@@ -1,9 +1,31 @@
-#!/usr/bin/env bash
-
 #
-# What does this script ?
 # List all init.d services
-#
 # ls /etc/init.d/ | sed -e 's/\.conf//'
-
-# @TODO need to dispay result of above command
+#
+alsa-utils
+anacron
+avahi-daemon
+bluetooth
+console-setup.sh
+cron
+cups
+cups-browsed
+dbus
+gdm3
+hwclock.sh
+keyboard-setup.sh
+kmod
+minissdpd
+networking
+network-manager
+pppd-dns
+procps
+rsync
+rsyslog
+saned
+speech-dispatcher
+ssh
+sudo
+udev
+unattended-upgrades
+x11-common

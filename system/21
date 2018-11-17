@@ -5,4 +5,17 @@
 # List all real users on the machine
 #
 
-cat /etc/passwd | grep /bin/bash | cut -d ':' -f 1
+# Each user has numerical ID cqlled UID
+# It is automatically slected from useradd command into the /etc/login.defs
+# file that has the UID_MIN varaiable and UID_MAX variable
+# Any new added user will have UID betweeen UID_MIN and UID_MAX
+# From https://www.cyberciti.biz/faq/linux-list-users-command/
+#
+MIN=$(grep "^UID_MIN" /etc/login.defs)
+MAX=$(grep "^UID_MAX" /etc/login.defs)
+
+awk -F ':' \
+	-v "min=${MIN##UID_MIN}" \
+	-v "max=${MAX##UID_MAX}" \
+	'{ if ( ($3 >= min && $3 <= max) || $3 == 0 ) print $0 }' \
+	/etc/passwd

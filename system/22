@@ -5,4 +5,4 @@
 # Add a new local user named client on the machine
 #
 
-useradd client
+useradd maurice

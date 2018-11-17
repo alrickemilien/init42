@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+!/usr/bin/env bash
 
 #
 # What does this script ?
@@ -30,6 +30,11 @@ fi
 
 if [ $(id -u $USER_TO_DELETE) -eq 0 ]; then
 	echo "Cannot delete root and all root process"
+	exit
+fi
+
+if [ -z $(who -u | grep $USER_TO_DELETE) ]; then
+	echo "The user is not loggued in, do nnot delete it."
 	exit
 fi
 

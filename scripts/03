@@ -7,7 +7,9 @@
 
 set -e
 
-readonly MODE=1366x768
+readonly CURRENT=$(xrandr | grep "current" | cut -d ',' -f 2)
+readonly X=$(echo $CURRENT | cut -d ' ' -f 2)
+readonly Y=$(echo $CURRENT | cut -d ' ' -f 4)
 
 # No arguments supplied
 if [ $# -eq 0 ] ;then
@@ -34,21 +36,21 @@ if [ $MONITOR_NUMBER -gt 2 ]; then
 fi
 
 if [ $ASK == "landscape" ] ;then
-        xrandr --output "$MONITOR1" --mode $MODE --rotate normal
+        xrandr --output "$MONITOR1" --mode "$X"x"$Y" --rotate normal
         if [ $MONITOR_NUMBER -gt 2 ]; then
           xrandr --output "$MONITOR2" --off
         fi
 elif [ $ASK == "portrait" ] ;then
-        xrandr --output "$MONITOR1" --mode $MODE --rotate left
+        xrandr --output "$MONITOR1" --mode "$X"x"$Y" --rotate left
         if [ $MONITOR_NUMBER -gt 2 ]; then
           xrandr --output "$MONITOR2" --off
         fi
 elif [[ $ASK == "horizon" ]] && [[ $MONITOR_NUMBER -gt 2 ]] ;then
-        xrandr --output "$MONITOR1" --mode $MODE --rotate normal
-        xrandr --output "$MONITOR2" --mode $MODE --rotate normal --right-of "$MONITOR1"
+        xrandr --output "$MONITOR1" --mode "$X"x"$Y" --rotate normal
+       xrandr --output "$MONITOR2" --mode "$X"x"$Y" --rotate normal --right-of "$MONITOR1"
 elif [[ $ASK == "zenith" ]] && [[ $MONITOR_NUMBER -gt 2 ]] ;then
-        xrandr --output "$MONITOR1" --mode $MODE --rotate left
-        xrandr --output "$MONITOR2" --mode $MODE --rotate left --below "$MONITOR1"
+        xrandr --output "$MONITOR1" --mode "$X"x"$Y" --rotate left
+        xrandr --output "$MONITOR2" --mode "$X"x"$Y" --rotate left --below "$MONITOR1"
 else
         echo "Unknown display"
         exit

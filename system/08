@@ -1,3 +1,2 @@
-This folder contains the RSA keys that allows ssh connexion with this user
-The ~ referes to the user home directory
-~/.ssh/authorized_keys
+This folder contains the RSA keys that allows ssh connexion on the machin
+/etc/ssh/ssh_host_rsa_key.pub
