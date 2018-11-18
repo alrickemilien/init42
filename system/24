@@ -5,4 +5,4 @@
 # List all installed packages on the machine
 #
 
-dpkg-query -f '${Package}\n' -W
+dpkg-query -f '${Package} ${Status}\n' -W | grep installed | cut -d ' ' -f 1
