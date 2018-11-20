@@ -19,9 +19,12 @@ readonly CONTENT=$(cat /etc/passwd)
 
 for X in $CONTENT
 do
-    LOGIN_VAR=$(echo "$X" | cut -d ':' -f1)
-    UID_VAR=$(echo "$X" | cut -d ':' -f4)
-    PATH_VAR=$(echo "$X" | rev | cut -d':' -f 1 | rev)
-
-    echo "$LOGIN_VAR:$UID_VAR:$PATH_VAR"
+	for Y in $X
+	do
+    	LOGIN_VAR=$(echo "$Y" | cut -d ':' -f1)
+    	UID_VAR=$(echo "$Y" | cut -d ':' -f4)
+    	PATH_VAR=$(echo "$Y" | rev | cut -d':' -f 1 | rev)
+	done
+	
+	echo "$LOGIN_VAR:$UID_VAR:$PATH_VAR"
 done

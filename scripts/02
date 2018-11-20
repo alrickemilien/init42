@@ -5,6 +5,11 @@
 # Supress a logged user on the machine
 #
 
+if [ "$EUID" -ne 0 ]
+	  then echo "Please run as root"
+	    exit
+fi
+
 readonly USAGE="Usage: $0 [USER]\n\
 	USER,		the user to suppress.\n"
 
@@ -33,7 +38,7 @@ if [ $(id -u $USER_TO_DELETE) -eq 0 ]; then
 	exit
 fi
 
-if [ -z $(who -u | grep $USER_TO_DELETE) ]; then
+if [ "$(who -u | grep $USER_TO_DELETE)" == "" ]; then
 	echo "The user is not loggued in, do nnot delete it."
 	exit
 fi
