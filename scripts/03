@@ -55,10 +55,10 @@ readonly PATH_TO_SCRIPT="$(cd "$(dirname "$0")" && pwd)/03"
 readonly RULE="@weekly $PATH_TO_SCRIPT"
 
 # Append to cron task only if no exist
-readonly RET="$(crontab -l 2> /dev/null | grep "$RULE")"
+readonly RET="$(crontab -l 2> /dev/null | grep -F "$RULE")"
 
 if [[ "$RET" == "" ]]; then
-  echo "$RULE" | crontab -
+  (crontab -l 2>/dev/null; echo -e "$RULE") | crontab -
 fi
 
 echo "DONE !"
